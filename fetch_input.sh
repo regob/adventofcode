@@ -15,4 +15,9 @@ fi
 
 URL=https://adventofcode.com/${YEAR}/day/${DAY}/input
 COOKIE=$(cat cookie.txt)
-wget -O "inputs/${YEAR}_${DAY}.txt" --header="Cookie: ${COOKIE}" "$URL"
+FILE="inputs/${YEAR}_${DAY}.txt"
+wget -O $FILE --header="Cookie: ${COOKIE}" "$URL"
+N_LINES=$(wc -l $FILE | cut -d ' ' -f1)
+echo "Num lines: $N_LINES"
+echo "Sample:"
+head -n 10 $FILE
