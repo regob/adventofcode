@@ -1,17 +1,11 @@
 fun main() {
-    fun part1(input: List<String>): Int {
-        return input.size
-    }
-
-    fun part2(input: List<String>): Int {
-        return input.size
-    }
-
-    // test if implementation meets criteria from the description, like:
-    val testInput = readInput("Day01_test")
-    check(part1(testInput) == 1)
-
-    val input = readInput("Day01")
-    println(part1(input))
-    println(part2(input))
+    val input = readInput(1)
+    val totals = input.trim().split("\n\n")
+        .map {
+            it.split("\n").map {x -> x.toInt()}
+        }
+        .map {it.sum()}
+        .sortedDescending()
+    println(totals.first())
+    println(totals.take(3).sum())
 }
