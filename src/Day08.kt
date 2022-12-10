@@ -1,4 +1,4 @@
-import java.lang.Integer.max
+import kotlin.math.max
 
 typealias Mat = List<List<Int>>
 
