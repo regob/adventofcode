@@ -1,4 +1,4 @@
-fun part1(input: String): Int {
+private fun part1(input: String): Int {
     return input.lines().asSequence()
         .map { (it[0] - 'A') to (it[2] - 'X') }
         // pairs of (player's shape, difference)
@@ -10,7 +10,7 @@ fun part1(input: String): Int {
         .sum()
 }
 
-fun part2(input: String): Int {
+private fun part2(input: String): Int {
     return input.lines().asSequence()
         .map { (it[0] - 'A') to (it[2] - 'X') }
         // (player's symbol, player's base score)

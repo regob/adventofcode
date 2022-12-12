@@ -4,6 +4,7 @@ typealias Mat = List<List<Int>>
 
 fun Mat.transpose(): Mat {
     val res = List<MutableList<Int>>(size) { mutableListOf() }
+
     for (j in indices)
         for (i in indices)
             res[j].add(this[i][j])
@@ -28,7 +29,7 @@ fun Mat.visibleFromLeft(): Mat {
     return res
 }
 
-fun part1(m: Mat): Int {
+private fun part1(m: Mat): Int {
     val sides = listOf(
         m.visibleFromLeft(),
         m.hflip().visibleFromLeft().hflip(),
@@ -65,7 +66,7 @@ fun Mat.scoreFromLeft(): Mat {
     return res
 }
 
-fun part2(m: Mat): Int {
+private fun part2(m: Mat): Int {
     val sides = listOf(
         m.scoreFromLeft(),
         m.hflip().scoreFromLeft().hflip(),

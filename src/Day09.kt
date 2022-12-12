@@ -1,9 +1,9 @@
 import kotlin.math.abs
 import kotlin.math.max
 
-fun sign(a: Int, b: Int) = if (b > a) 1 else -1
+private fun sign(a: Int, b: Int) = if (b > a) 1 else -1
 
-fun newPos(head: Pair<Int, Int>, tail: Pair<Int, Int>): Pair<Int, Int> {
+private fun newPos(head: Pair<Int, Int>, tail: Pair<Int, Int>): Pair<Int, Int> {
     val (tx, ty) = tail
     val (xDiff, yDiff) = abs(head.first - tx) to abs(head.second - ty)
     if (max(xDiff, yDiff) <= 1) return tail
@@ -12,7 +12,7 @@ fun newPos(head: Pair<Int, Int>, tail: Pair<Int, Int>): Pair<Int, Int> {
     return tx + sign(tx, head.first) to ty + sign(ty, head.second)
 }
 
-fun direction(ch: Char) = when (ch) {
+private fun direction(ch: Char) = when (ch) {
     'U' -> 0 to -1
     'D' -> 0 to 1
     'L' -> -1 to 0

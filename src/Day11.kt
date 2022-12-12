@@ -1,7 +1,7 @@
-val itemsRegex = Regex(".*items: (.*)")
-val opRegex = Regex("Operation: new = ([a-z0-9]+) ([+-/*]) ([a-z0-9]+)")
-val testRegex = Regex(".*divisible by (\\d+)")
-val decRegex = Regex(".*throw to monkey (\\d+)")
+private val itemsRegex = Regex(".*items: (.*)")
+private val opRegex = Regex("Operation: new = ([a-z0-9]+) ([+-/*]) ([a-z0-9]+)")
+private val testRegex = Regex(".*divisible by (\\d+)")
+private val decRegex = Regex(".*throw to monkey (\\d+)")
 
 class Monkey(lines: List<String>) {
     var items: MutableList<Long>

@@ -1,7 +1,7 @@
 
 data class Node(val parent: Node?, val children: MutableMap<String, Node> = mutableMapOf(), var size: Int = 0)
 
-fun calcTotalSize(node: Node, acc: MutableList<Int>): Int {
+private fun calcTotalSize(node: Node, acc: MutableList<Int>): Int {
     var total = node.children.values.sumOf {
         calcTotalSize(it, acc)
     }
