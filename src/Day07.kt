@@ -1,7 +1,7 @@
 
-data class Node(val parent: Node?, val children: MutableMap<String, Node> = mutableMapOf(), var size: Int = 0)
+data class Elem(val parent: Elem?, val children: MutableMap<String, Elem> = mutableMapOf(), var size: Int = 0)
 
-private fun calcTotalSize(node: Node, acc: MutableList<Int>): Int {
+private fun calcTotalSize(node: Elem, acc: MutableList<Int>): Int {
     var total = node.children.values.sumOf {
         calcTotalSize(it, acc)
     }
@@ -21,14 +21,14 @@ fun main() {
         }
 
 
-    val root = Node(null)
+    val root = Elem(null)
     var cur = root
     for (cmdLines in cmds) {
         val cmd = cmdLines[0]
         when (cmd) {
             "ls" ->  cmdLines.subList(1, cmdLines.size).forEach {
                 val (x, y) = it.split(" ")
-                if (x == "dir") cur.children[y] = Node(cur)
+                if (x == "dir") cur.children[y] = Elem(cur)
                 else cur.size += x.toInt()
             }
             else -> when(val tar = cmd.split(" ")[1]) {
