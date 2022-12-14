@@ -1,6 +1,6 @@
 import kotlin.math.max
 
-typealias Mat = List<List<Int>>
+private typealias Mat = List<List<Int>>
 
 fun Mat.transpose(): Mat {
     val res = List<MutableList<Int>>(size) { mutableListOf() }

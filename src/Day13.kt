@@ -1,4 +1,4 @@
-typealias Item = Any
+private typealias Item = Any
 
 private fun parse(s: String): Item {
     val path = mutableListOf<MutableList<Item>>()
