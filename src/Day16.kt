@@ -54,7 +54,7 @@ fun main() {
     fun search(node: String, t: Int, valves: Int, rep: Int=0): Int {
         val cacheEntry = CacheEntry(node, t, valves, rep-1)
         if (t <= 1) {
-            if (rep > 0) returnStore(cacheEntry, search(node, t, valves, rep-1))
+            if (rep > 0) returnStore(cacheEntry, search(initNode, initTime, valves, rep-1))
             return 0
         }
         if (cacheEntry in cache) return cache[cacheEntry]!!
