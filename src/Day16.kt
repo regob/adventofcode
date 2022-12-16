@@ -84,7 +84,7 @@ fun main() {
         // if absolutely no other moves can be made, and we have repetitions left, check the next rep
         if (g.all {it.first >= t - 1} && rep > 0)
             return returnStore(cacheEntry,
-                search(initNode, initTime, valves, rep-1))
+                best + search(initNode, initTime, valves, rep-1))
 
         return returnStore(cacheEntry, best)
     }
