@@ -36,53 +36,35 @@ fun main() {
             p == start || p == target || (p.first > 0 && p.second > 0 && p.first < N - 1 && p.second < M - 1)
         }
 
+    fun simulate(phases: Int): Int {
+        var fields = setOf(start)
+        var m = mStart
+        var phase = 0
 
-    // part 1
-    var fields = setOf(start)
-    var m = mStart
-    for (t in 1..Int.MAX_VALUE) {
-        m = nextMap(m)
-        val s = mutableSetOf<Pair<Int, Int>>()
-        for ((i, j) in fields) {
-            if (m[i][j] == 0) s.add(i to j)
-            // try moving in each direction
-            for ((y, x) in neighbors(i, j))
-                if (m[y][x] == 0) s.add(y to x)
-        }
+        for (t in 1..Int.MAX_VALUE) {
+            m = nextMap(m)
+            var s = mutableSetOf<Pair<Int, Int>>()
+            for ((i, j) in fields) {
+                if (m[i][j] == 0) s.add(i to j)
+                for ((y, x) in neighbors(i, j))
+                    if (m[y][x] == 0) s.add(y to x)
+            }
 
-        if (target in s) {
-            println(t)
-            break
+            if (phase % 2 == 0 && target in s) {
+                s = mutableSetOf(target)
+                phase += 1
+            } else if (phase % 2 == 1 && start in s) {
+                s = mutableSetOf(start)
+                phase += 1
+            }
+            if (phase == phases) return t
+            fields = s
         }
-        fields = s
+        throw IllegalStateException()
     }
 
-    // part 2
-    fields = setOf(start)
-    m = mStart
-    // phase0: start -> target, phase1: target -> start, phase2: start -> target
-    var phase = 0
-    for (t in 1..Int.MAX_VALUE) {
-        m = nextMap(m)
-        var s = mutableSetOf<Pair<Int, Int>>()
-        for ((i, j) in fields) {
-            if (m[i][j] == 0) s.add(i to j)
-            for ((y, x) in neighbors(i, j))
-                if (m[y][x] == 0) s.add(y to x)
-        }
-
-        if (phase % 2 == 0 && target in s) {
-            s = mutableSetOf(target)
-            phase += 1
-        } else if (phase % 2 == 1 && start in s) {
-            s = mutableSetOf(start)
-            phase += 1
-        }
-        if (phase > 2) {
-            println(t)
-            break
-        }
-
-        fields = s
-    }
+    // part1
+    println(simulate(1))
+    // part2
+    println(simulate(3))
 }
