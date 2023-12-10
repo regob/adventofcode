@@ -5,7 +5,7 @@ from functools import reduce
 from operator import mul
 
 INPUT_FILE = 'input/2023_10.txt'
-# INPUT_FILE = 'input/2023_10_test2.txt'
+# INPUT_FILE = 'input/2023_10_test3.txt'
 
 with open(INPUT_FILE) as fp:
     txt = fp.readlines()
@@ -33,17 +33,14 @@ while g[sx][sy] != 'S':
     if sy == Y:
         sx, sy = sx + 1, 0
 
-dist = [[1e9] * Y for _ in range(X)]
-cnt = [[0] * Y for _ in range(X)]
-dist[sx][sy] = 0
-
 
 def neighbors(x, y, dds):
     neigh = [(x + dx, y + dy) for (dx, dy) in dds]
     return [(x, y) for x, y in neigh if x >= 0 and y >= 0 and x < X and y < Y]
 
 
-side = [[0] * X for _ in range(Y)]
+in_loop = [[False] * Y for _ in range(X)]
+side = [[0] * Y for _ in range(X)]
 sides = {
     (0, 1): ((-1, 0), (1, 0)),
     (0, -1): ((1, 0), (-1, 0)),
@@ -51,59 +48,49 @@ sides = {
     (-1, 0): ((0, -1), (0, 1)),
 }
 
-best = 0
-for xx, yy in neighbors(sx, sy, neigh[g[sx][sy]]):
+for x, y in neighbors(sx, sy, neigh[g[sx][sy]]):
     prev = sx, sy
-    cnt[xx][yy] += 1
-    dist[xx][yy] = min(dist[xx][yy], 1)
+    path = [(x, y)]
 
-    path = [(xx, yy)]
-    while (xx, yy) != (sx, sy):
-        opts = [pt for pt in neighbors(xx, yy, neigh[g[xx][yy]]) if pt != prev]
+    while (x, y) != (sx, sy):
+        opts = [pt for pt in neighbors(x, y, neigh[g[x][y]]) if pt != prev]
         if len(opts) != 1:
             break
         ox, oy = opts[0]
-        if (xx, yy) not in neighbors(ox, oy, neigh[g[ox][oy]]):
+        if (x, y) not in neighbors(ox, oy, neigh[g[ox][oy]]):
             break
 
-        prev = xx, yy
-        xx, yy = opts[0]
+        prev = x, y
+        x, y = opts[0]
         path.append(opts[0])
-        cnt[xx][yy] += 1
-        dist[xx][yy] = min(dist[xx][yy], len(path))
 
-    if (xx, yy) == (sx, sy):
+    # the loop got closed, we got back to start
+    if (x, y) == (sx, sy):
         for x, y in path:
-            if cnt[x][y] > 1:
-                best = max(best, dist[x][y])
-        px, py = path[0]
-        if cnt[px][py] == 2:
-            for x, y in path[1:]:
-                dx, dy = x - px, y - py
-                l, r = sides[(dx, dy)]
-                nns = [
-                    (x + l[0], y + l[1], 'l'),
-                    (px + l[0], py + l[1], 'l'),
-                    (x + r[0], y + r[1], 'r'),
-                    (px + r[0], py + r[1], 'r'),
-                ]
-                nns = [pt for pt in nns if pt[0] >= 0 and pt[1] >= 0 and pt[0] < X and pt[1] < Y]
-                for nx, ny, ch in nns:
-                    if cnt[nx][ny] < 2:
-                        side[nx][ny] = ch
-                px, py = x, y
+            in_loop[x][y] = True
+        print('Part 1: ', len(path) // 2)
+        break
 
+# walk the path and mark which cells are on the left and right side
+px, py = sx, sy
+for x, y in path:
+    dx, dy = x - px, y - py
+    l, r = sides[(dx, dy)]
+    side_cells = [
+        (x + l[0], y + l[1], 'l'),
+        (px + l[0], py + l[1], 'l'),
+        (x + r[0], y + r[1], 'r'),
+        (px + r[0], py + r[1], 'r'),
+    ]
+    side_cells = [pt for pt in side_cells
+                  if pt[0] >= 0 and pt[1] >= 0 and pt[0] < X and pt[1] < Y]
 
-for x in range(X):
-    for y in range(Y):
-        if cnt[x][y] == 2:
-            # print(x, y, side[x][y], sx, sy)
-            assert side[x][y] == 0
+    for nx, ny, ch in side_cells:
+        if not in_loop[nx][ny]:
+            side[nx][ny] = ch
+    px, py = x, y
 
-print(best)
-
-was = [[0] * X for _ in range(Y)]
-
+was = [[0] * Y for _ in range(X)]
 grid_neigh = [(-1, 0), (1, 0), (0, -1), (0, 1)]
 
 
@@ -112,7 +99,7 @@ def dfs(sx, sy):
 
     while len(s):
         x, y = s.pop()
-        if was[x][y] or cnt[x][y] == 2:
+        if was[x][y] or in_loop[x][y]:
             continue
         was[x][y] = 1
         s.extend(neighbors(x, y, grid_neigh))
@@ -131,6 +118,20 @@ for x in range(X):
         side_cnt[side[x][y]] = side_cnt.get(side[x][y], 0) + 1
 
 
-def pg(gr):
-    for l in gr:
-        print(' '.join(map(lambda x: 'M' if isinstance(x, float) and x >= 1e8 else str(x), l)))
+# determine the left or the right side of the loop is inside
+left, right = 0, 0
+px, py = sx, sy
+pdiff = (0, 0)
+for x, y in path:
+    dx, dy = x - px, y - py
+    # it was a left turn (counterclockwise rotation)
+    if (dx, dy) == (-pdiff[1], pdiff[0]):
+        left += 1
+    elif (dx, dy) == (pdiff[1], -pdiff[0]):
+        right += 1
+
+    pdiff = dx, dy
+    px, py = x, y
+
+print(f'Left turns: {left}, right turns: {right}')
+print('Part 2', side_cnt['l' if left > right else 'r'])
