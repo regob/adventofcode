@@ -17,12 +17,10 @@ g = txt.split('\n')
 X, Y = len(g), len(g[0])
 
 dirs = [-1, 0, 1, 0, -1]
-D = 64
-
 point = namedtuple('point', ['x', 'y'])
 
 
-def neighbors(p) -> list[point]:
+def neighbors(p, X, Y) -> list[point]:
     pts = [
         point(p.x + dirs[i], p.y + dirs[i + 1]) for i in range(len(dirs) - 1)
     ]
@@ -37,12 +35,41 @@ def start_position() -> point:
     raise ValueError('start not found')
 
 
+########################################
+# part 1
+
+D = 64
 states = [set() for _ in range(D + 1)]
 states[0].add(start_position())
 
 for d in range(D):
     for p in states[d]:
-        for p_neigh in neighbors(p):
+        for p_neigh in neighbors(p, X, Y):
             states[d + 1].add(p_neigh)
 
-print(len(states[D]))
+print('part1', len(states[D]))
+
+
+########################################
+# part 2
+
+D = 26501365
+assert X == Y
+
+
+def total_reachable(g, start_pos, n_steps):
+    state = {start_pos}
+
+    for _ in range(n_steps):
+        new_state = set()
+        for p in state:
+            for p_neigh in neighbors(p, X, Y):
+                new_state.add(p_neigh)
+        state = new_state
+        print(_, len(state))
+    return len(state)
+
+
+# number of fields reacheable in even/odd number of steps
+C_EVEN = total_reachable(g, point(0, 0), 10 * X + bool(X % 2))
+C_ODD = total_reachable(g, point(0, 0), 10 * X + bool((X + 1) % 2))
