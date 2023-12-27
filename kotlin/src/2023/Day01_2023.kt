@@ -44,7 +44,4 @@ fun main() {
         res2 += first_dig * 10 + last_dig
     }
     println("Part 2: $res2")
-
-
-
 }
