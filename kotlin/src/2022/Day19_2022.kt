@@ -1,6 +1,6 @@
 import kotlin.math.*
 
-data class State(val resources: List<Int>, val robots: List<Int>, val t: Int)
+private data class State(val resources: List<Int>, val robots: List<Int>, val t: Int)
 
 // ore, clay, obsidian, geode
 fun maxGeodes(resources: List<Int>, robots: List<Int>, t: Int, costs: List<List<Int>>): Int {

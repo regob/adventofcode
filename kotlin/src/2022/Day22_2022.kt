@@ -1,4 +1,4 @@
-data class P(val x: Int, val y: Int)
+private data class P(val x: Int, val y: Int)
 
 fun main() {
     val input = readInput(22).lines()
