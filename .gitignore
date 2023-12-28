@@ -4,3 +4,5 @@ build
 *.txt
 inputs/
 outputs/
+*.gml
+*.graphml
