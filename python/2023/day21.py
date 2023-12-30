@@ -73,32 +73,26 @@ def total_reachable(start_pos, n_steps):
                 new_state.add(p_neigh)
 
         if (n_steps - i) % 2 == 1 and prev_state == new_state:
-            return len(new_state)
+            return len(new_state), i + 1
         prev_state, state = state, new_state
-    return len(state)
+    return len(state), n_steps
 
 
 @cache
 def find_max_dist_reachable(start_pos, n_steps):
-    base_odd = total_reachable(start_pos, n_steps - int(n_steps % 2 == 0))
-    base_even = total_reachable(start_pos, n_steps - int(n_steps % 2 == 1))
+    reach_odd, steps_odd = total_reachable(start_pos, 10 * X + 1)
+    reach_even, steps_even = total_reachable(start_pos, 10 * X)
 
-    l, r = 0, n_steps
-    while r - l > 1:
-        mid = (r + l) // 2
-        steps_remain = n_steps - X * mid
+    mx = (n_steps - max(steps_odd, steps_even)) // X
+    steps = n_steps - (mx + 1) * X
+    mod = (n_steps + (mx + 1)) % 2
+    while (mod == 0 and total_reachable(start_pos, steps)[0] == reach_odd) or (
+            mod == 1 and total_reachable(start_pos, steps)[0] == reach_even):
+        mx += 1
+        steps -= X
+        mod = (mod + 1) % 2
 
-        if steps_remain >= 0 and (
-            steps_remain % 2 == 1 and total_reachable(
-                start_pos, steps_remain) == base_odd
-        ) or (
-            steps_remain % 2 == 0 and total_reachable(
-                start_pos, steps_remain) == base_even
-        ):
-            l = mid
-        else:
-            r = mid
-    return l
+    return mx
 
 
 def total_at_corner(direction, n_steps):
@@ -114,13 +108,13 @@ def total_at_corner(direction, n_steps):
     else:
         raise ValueError("Invalid direction")
 
-    mx = find_max_dist_reachable(start_pos, n_steps) + 1
-    total_odd = total_reachable(start_pos, n_steps)
-    total_even = total_reachable(start_pos, n_steps - 1)
+    mx = find_max_dist_reachable(start_pos, n_steps)
+    total_odd = total_reachable(start_pos, n_steps)[0]
+    total_even = total_reachable(start_pos, n_steps - 1)[0]
 
     total = total_odd * math.ceil(mx / 2) + total_even * math.floor(mx / 2)
     while n_steps >= mx * X:
-        extra = total_reachable(start_pos, n_steps - mx * X)
+        extra = total_reachable(start_pos, n_steps - mx * X)[0]
         total += extra
         mx += 1
 
@@ -135,15 +129,15 @@ def total_along_edge(direction, n_steps):
     )
     assert all(x in {-1, 1} for x in direction)
 
-    mx = find_max_dist_reachable(start_pos, n_steps) + 1
-    total_odd = total_reachable(start_pos, n_steps)
-    total_even = total_reachable(start_pos, n_steps - 1)
+    mx = find_max_dist_reachable(start_pos, n_steps)
+    total_odd = total_reachable(start_pos, n_steps)[0]
+    total_even = total_reachable(start_pos, n_steps - 1)[0]
 
     total = total_odd * sum(range(1, mx + 1, 2)) + \
         total_even * sum(range(2, mx + 1, 2))
 
     while n_steps >= mx * X:
-        extra = total_reachable(start_pos, n_steps - mx * X)
+        extra = total_reachable(start_pos, n_steps - mx * X)[0]
         total += extra * (mx + 1)
         mx += 1
 
@@ -151,7 +145,7 @@ def total_along_edge(direction, n_steps):
 
 
 def total_reachable_infinite(start_pos, n_steps):
-    total = total_reachable(point(H, H), n_steps)
+    total = total_reachable(point(H, H), n_steps)[0]
     print('init', total)
 
     for direction in [point(0, 1), point(1, 0), point(-1, 0), point(0, -1)]:
@@ -192,7 +186,7 @@ print(total_reachable_infinite(point(H, H), D))
 
 # D = 51
 # set_mock()
-# print('brute:', total_reachable(point(H, H), D))
+# print('brute:', total_reachable(point(H, H), D)[0])
 # set_orig()
 # print('inf:', total_reachable_infinite(point(H, H), D))
 
