@@ -1,8 +1,17 @@
+# kotlin
 .gradle
 kotlin/.idea
 build
+
+# some input formats
 *.txt
 inputs/
 outputs/
 *.gml
 *.graphml
+
+# python
+uv.lock
+
+# local env
+.envrc
