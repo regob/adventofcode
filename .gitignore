@@ -11,7 +11,34 @@ outputs/
 *.graphml
 
 # python
+__pycache__/
+*.py[cod]
+.venv
 uv.lock
+
+## Distribution / packaging
+.Python
+develop-eggs/
+dist/
+eggs/
+.eggs/
+parts/
+sdist/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Jupyter Notebook
+.ipynb_checkpoints
 
 # local env
 .envrc
+
+# temporary files
+*.#
+TAGS
+*.-undo-tree
+
