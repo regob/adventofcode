@@ -1,23 +1,23 @@
 #!/bin/bash
 
 if [ -z "$2" ]; then
-    YEAR=2023
+    YEAR=$(date +"%Y")
 else
     YEAR=$2
 fi
 
 if [ -z "$1" ]; then
-    echo "Day param not provided."
-    exit 1
+    DAY=$(date +"%d")
 else
-    DAY=$1
+    DAY=$(printf "%02d" "$1")
 fi
 
-URL=https://adventofcode.com/${YEAR}/day/${DAY}/input
-COOKIE=$(cat cookie.txt)
+echo "Fetching input for $DAY Dec $YEAR..."
+
+DAY_NOLEADINGZERO=$(echo "$DAY" | sed 's/^0*//')
+URL=https://adventofcode.com/${YEAR}/day/${DAY_NOLEADINGZERO}/input
 FILE="input/${YEAR}_${DAY}.txt"
 
-echo $COOKIE
 wget -O $FILE --load-cookies=./cookies.txt "$URL"
 N_LINES=$(wc -l $FILE | cut -d ' ' -f1)
 echo "Num lines: $N_LINES"
