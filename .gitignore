@@ -36,9 +36,11 @@ MANIFEST
 
 # local env
 .envrc
+.dir-locals.el
 
 # temporary files
 *.#
 TAGS
 *.-undo-tree
+.ruff_cache/
 

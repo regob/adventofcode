@@ -1,2 +1,4 @@
-from .grid import *
-from .load_input import *
+from . import load_input
+from . import grid
+
+__all__ = ["load_input", "grid"]

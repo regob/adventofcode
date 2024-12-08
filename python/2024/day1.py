@@ -1,6 +1,6 @@
 import os
 from collections import Counter
-from aoc_utils import read_input_lines
+from aoc_utils.load_input import read_input_lines
 
 lines = read_input_lines()
 nums1, nums2 = [], []
