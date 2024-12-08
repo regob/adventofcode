@@ -32,22 +32,19 @@ def next_pos(g, pos, dir_idx):
 
 def num_steps_taken(g, pos, dir_idx):
     # bitmap of direction indices used to visit a given field
-    visited = [[0] * m for _ in range(n)]
-    visited[pos.x][pos.y] = 1 << dir_idx
+    visited = {pos: 1 << dir_idx}
 
     while True:
         nxt = next_pos(g, pos, dir_idx)
         if nxt is None:
-            break
-        if visited[nxt.x][nxt.y] & (1 << dir_idx):
+            return len(visited)
+        if visited.get(nxt, 0) & (1 << dir_idx):
             return -1           # cycle detected
         if g[nxt.x][nxt.y] == '#':
             dir_idx = (dir_idx + 1) % len(dirs)
         else:
             pos = nxt
-        visited[pos.x][pos.y] |= (1 << dir_idx)
-    total = sum(sum(row) for row in visited)
-    return total
+        visited[pos] = visited.get(pos, 0) | (1 << dir_idx)
 
 
 print('part 1', num_steps_taken(g, init_pos, dir_idx))
