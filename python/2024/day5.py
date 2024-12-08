@@ -6,10 +6,11 @@ i_line = 0
 for i_line, line in enumerate(g):
     if '|' not in line:
         break
-    x, y = map(int,line.split('|'))
+    x, y = map(int, line.split('|'))
     come_after.setdefault(x, []).append(y)
 
-prints = [tuple(map(int, line.strip().split(','))) for line in g[i_line+1:]]
+prints = [tuple(map(int, line.strip().split(','))) for line in g[i_line + 1 :]]
+
 
 def print_is_in_order(nums, come_after):
     num_seen = set()
@@ -20,11 +21,13 @@ def print_is_in_order(nums, come_after):
         num_seen.add(x)
     return True
 
+
 total = 0
 for pr in prints:
     if print_is_in_order(pr, come_after):
         total += pr[len(pr) // 2]
 print('part 1', total)
+
 
 def topological_order(nums, come_after):
     "Get the topological order of some nodes in a graph."
@@ -48,7 +51,7 @@ def topological_order(nums, come_after):
         if x in seen:
             continue
         add_node(x)
-        
+
         while len(stack):
             top = stack[-1]
             for ptr in range(stack_ptr[-1], len(come_after.get(top, []))):
@@ -64,8 +67,8 @@ def topological_order(nums, come_after):
                 pop_node()
     toposort.reverse()
     return toposort
-                
-    
+
+
 total = 0
 for pr in prints:
     if not print_is_in_order(pr, come_after):
