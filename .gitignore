@@ -37,6 +37,7 @@ MANIFEST
 # local env
 .envrc
 .dir-locals.el
+pyrightconfig.json
 
 # temporary files
 *.#
