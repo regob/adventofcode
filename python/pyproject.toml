@@ -17,3 +17,8 @@ aoc-utils = { path = "aoc_utils", editable = true }
 [tool.ruff.format]
 # Use single quotes in `ruff format`.
 quote-style = "preserve"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3.4",
+]
