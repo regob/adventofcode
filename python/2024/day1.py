@@ -10,10 +10,7 @@ for line in lines:
     nums2.append(x2)
 
 # part 1
-total_diff = sum(
-    abs(x1 - x2)
-    for x1, x2 in zip(sorted(nums1), sorted(nums2))
-)
+total_diff = sum(abs(x1 - x2) for x1, x2 in zip(sorted(nums1), sorted(nums2)))
 print(total_diff)
 
 # part 2
