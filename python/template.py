@@ -1,7 +1,11 @@
-import os
+from aoc_utils.load_input import read_input_lines
+from aoc_utils.linalg import v2
+from aoc_utils.grid import Grid
 
-INPUT_FILE = 'input/2024_01.txt'
+# part 1 ######################################################################
 
-with open(INPUT_FILE) as fp:
-    txt = fp.readlines()
-    # txt = fp.read()
+rows = read_input_lines(postfix="")
+ans = 0
+print('part 1:', ans)
+
+
