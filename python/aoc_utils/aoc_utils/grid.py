@@ -28,9 +28,17 @@ class Grid:
         yield from self.g
 
     def __getitem__(self, key):
-        if not isinstance(key, int):
+        if isinstance(key, int):
+            return self.g[key]
+        if isinstance(key, v2):
+            return self.g[key.x][key.y]
+        raise KeyError(f"Invalid index into grid: {key}")
+
+    def __setitem__(self, key, value):
+        if isinstance(key, v2):
+            self.g[key.x][key.y] = value
+        else:
             raise KeyError(f"Invalid index into grid: {key}")
-        return self.g[key]
 
     def contains_pos(self, pos: v2 | tuple):
         "Whether coordinate (i, j) is inside the grid."
@@ -89,3 +97,38 @@ class Grid:
             + r2
         )
         return '\n'.join(rows)
+
+    @classmethod
+    def empty_grid(cls, n: int, m: int, fill: object = 0):
+        return cls([[fill for _ in range(m)] for _ in range(n)])
+
+
+    def neighbors_of(self, pos: v2, diag: bool = False):
+        "Generate neighbors of a coordinate in the grid."
+        if pos.x > 0:
+            yield v2(pos.x - 1, pos.y)
+
+            if diag and pos.y > 0:
+                yield v2(pos.x - 1, pos.y - 1)
+
+            if diag and pos.y < self.m - 1:
+                yield v2(pos.x - 1, pos.y + 1)
+
+        if pos.x < self.n - 1:
+            yield v2(pos.x + 1, pos.y)
+
+            if diag and pos.y > 0:
+                yield v2(pos.x + 1, pos.y - 1)
+
+            if diag and pos.y < self.m - 1:
+                yield v2(pos.x + 1, pos.y + 1)
+
+        if pos.y > 0:
+            yield v2(pos.x, pos.y - 1)
+
+        if pos.y < self.m - 1:
+            yield v2(pos.x, pos.y + 1)
+        
+
+    def count(self, x: object):
+        return sum(r.count(x) for r in self.g)
