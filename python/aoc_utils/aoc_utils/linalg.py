@@ -32,4 +32,9 @@ class v2:
 
     def __iter__(self):
         yield from (self.x, self.y)
-        
+
+    def __getitem__(self, key):
+        return (self.x, self.y)[key]
+
+    def __str__(self):
+        return str((self.x, self.y))
