@@ -1,12 +1,14 @@
+from typing import TypeVar, Generic, Sequence
 from aoc_utils.linalg import v2
 
+T = TypeVar('T')
 
-class Grid:
+class Grid(Generic[T]):
     n: int
     m: int
-    g: list[list[object]]
+    g: list[list[T]]
 
-    def __init__(self, rows: list):
+    def __init__(self, rows: list[Sequence[T]]):
         if not len(rows) or not len(rows[0]) or not len(set(len(r) for r in rows)):
             raise ValueError("Invalid grid.")
         self.n = len(rows)
@@ -14,7 +16,7 @@ class Grid:
         self.g = [list(row) for row in rows]
 
     def _slice_row(
-        self, row: list, cols_1: slice, cols_2: slice, total_cols: int, fill: str = ' '
+        self, row: list[T], cols_1: slice, cols_2: slice, total_cols: int, fill: str = ' '
     ):
         # slice out columns we need and take the first character in
         # each cell (in case the grid does not contain chars)
@@ -99,7 +101,7 @@ class Grid:
         return '\n'.join(rows)
 
     @classmethod
-    def empty_grid(cls, n: int, m: int, fill: object = 0):
+    def empty_grid(cls, n: int, m: int, fill: T = 0):
         return cls([[fill for _ in range(m)] for _ in range(n)])
 
 
@@ -130,5 +132,5 @@ class Grid:
             yield v2(pos.x, pos.y + 1)
         
 
-    def count(self, x: object):
+    def count(self, x: T):
         return sum(r.count(x) for r in self.g)

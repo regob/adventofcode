@@ -2,8 +2,8 @@ from dataclasses import dataclass
 
 @dataclass(slots=True)
 class v2:
-    x: float
-    y: float
+    x: float | int
+    y: float | int
 
     def __add__(self, v):
         return v2(self.x + v.x, self.y + v.y)
@@ -38,3 +38,7 @@ class v2:
 
     def __str__(self):
         return str((self.x, self.y))
+
+    def __lt__(self, other):
+        if isinstance(other, v2):
+            return self.x < other.x or (self.x == other.x and self.y < other.y)
