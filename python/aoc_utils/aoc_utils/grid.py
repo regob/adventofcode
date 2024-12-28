@@ -134,3 +134,9 @@ class Grid(Generic[T]):
 
     def count(self, x: T):
         return sum(r.count(x) for r in self.g)
+
+    def index(self, x: T):
+        for i, r in enumerate(self.g):
+            if x in r:
+                return v2(i, r.index(x))
+        return None
