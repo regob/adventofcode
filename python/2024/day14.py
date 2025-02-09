@@ -54,7 +54,7 @@ def safety_factor(robots: list, n: int, m: int):
     return reduce(mul, counts, 1)
 
 
-rows = read_input_lines(14, postfix="")
+rows = read_input_lines(14, 2024, postfix="")
 robots = [parse_robot(s) for s in rows]
 n, m = 103, 101
 

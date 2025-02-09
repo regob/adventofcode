@@ -57,7 +57,7 @@ def total_price(cases: list[Case], max_steps: int = 100):
     return total
 
 
-txt = read_input(13, postfix="")
+txt = read_input(13, 2024, postfix="")
 cases = [parse_case(s) for s in txt.strip().split('\n\n')]
 
 ans = total_price(cases)

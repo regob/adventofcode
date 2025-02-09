@@ -70,7 +70,7 @@ def sum_gps_coordinates(w: Warehouse, ch: str = 'O') -> int:
     )
 
 
-w_init, moves = parse_input(read_input(15, postfix=""))
+w_init, moves = parse_input(read_input(15, 2024, postfix=""))
 w = deepcopy(w_init)
 w = do_all_steps(w, moves)
 

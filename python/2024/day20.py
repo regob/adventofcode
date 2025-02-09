@@ -54,7 +54,7 @@ def all_savings_above(savings: list, limit: int = 100):
     return sum((x[2] >= limit) for x in savings)
 
 
-rows = read_input_lines(20, postfix="")
+rows = read_input_lines(20, 2024, postfix="")
 g, s, t = init_input_grid(rows)
 dist = shortest_distances(g, t)
 savings = all_cheat_savings(dist)

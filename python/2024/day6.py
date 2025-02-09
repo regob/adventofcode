@@ -1,7 +1,7 @@
 from typing import NamedTuple
 from aoc_utils.load_input import read_input_lines
 
-g = read_input_lines(6, postfix="")
+g = read_input_lines(6, 2024, postfix="")
 # convert rows to lists to allow mutation in part 2
 g = [list(row) for row in g]
 n, m = len(g), len(g[0])

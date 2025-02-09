@@ -3,7 +3,7 @@ import itertools
 import operator
 from aoc_utils.load_input import read_input_lines
 
-g = read_input_lines(7, postfix="")
+g = read_input_lines(7, 2024, postfix="")
 
 
 def parse_line(line):

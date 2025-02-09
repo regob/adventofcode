@@ -36,7 +36,7 @@ def num_designs_possible_brute(patterns: set[str], designs: list[str], check_fn:
     return sum(check_fn(patterns, d) for d in designs)
 
 
-patterns, designs = parse_input(read_input(19, postfix=""))
+patterns, designs = parse_input(read_input(19, 2024, postfix=""))
 ans = num_designs_possible_brute(patterns, designs, is_design_possible_brute)
 print('part 1:', ans)
 

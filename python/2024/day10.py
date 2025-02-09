@@ -29,7 +29,7 @@ def peaks_from(g: Grid, pos: v2) -> int:
     return peaks
 
 
-rows = [list(map(int, xs)) for xs in read_input_lines(10, postfix="")]
+rows = [list(map(int, xs)) for xs in read_input_lines(10, 2024, postfix="")]
 g = Grid(rows)
 
 ans = 0

@@ -42,7 +42,7 @@ def checksum(id_arr: list):
     return sum(i * x for i, x in enumerate(id_arr) if x >= 0)
 
 
-txt = read_input(9, postfix="").strip()
+txt = read_input(9, 2024, postfix="").strip()
 ids = id_array(parse_disk_map(txt))
 ids = defragment(ids)
 ans = checksum(ids)

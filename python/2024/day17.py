@@ -121,7 +121,7 @@ def parse_input(s: str):
     return reg, p
 
 
-reg, program = parse_input(read_input(17, postfix=""))
+reg, program = parse_input(read_input(17, 2024, postfix=""))
 machine = Machine(reg)
 ans = machine.run_program(program)
 print('part 1:', ans)

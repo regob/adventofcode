@@ -37,7 +37,7 @@ def price_all_regions(g: Grid, g_fill: Grid) -> int:
                 next_id += 1
     return price
                 
-g = Grid(read_input_lines(12, postfix=""))
+g = Grid(read_input_lines(12, 2024, postfix=""))
 g_fill = Grid.empty_grid(g.n, g.m)
 
 ans = price_all_regions(g, g_fill)

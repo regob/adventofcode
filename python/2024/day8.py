@@ -30,7 +30,7 @@ def all_antinodes(locations: dict, g: Grid):
     return set(v for _, positions in locations.items() for v in antinodes(positions, g))
 
 
-g = Grid(read_input_lines(8, postfix=""))
+g = Grid(read_input_lines(8, 2024, postfix=""))
 locs = parse_grid(g)
 total = len(all_antinodes(locs, g))
 print('part 1', total)

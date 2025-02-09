@@ -30,7 +30,7 @@ def step_all_stones(stones: list[int]) -> list[int]:
     return stones_new
 
 
-init_stones = list(map(int, read_input(11, postfix="").split()))
+init_stones = list(map(int, read_input(11, 2024, postfix="").split()))
 
 stones = init_stones
 for _ in range(25):

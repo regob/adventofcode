@@ -1,7 +1,7 @@
 import sys
 from aoc_utils.load_input import read_input_lines
 
-g = read_input_lines(4, postfix="")
+g = read_input_lines(4, 2024, postfix="")
 
 
 def all_substrings_starting_from(g, i, j, length):

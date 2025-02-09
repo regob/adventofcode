@@ -1,6 +1,6 @@
 from aoc_utils.load_input import read_input_lines
 
-g = read_input_lines(5, postfix="")
+g = read_input_lines(5, 2024, postfix="")
 come_after = {}
 i_line = 0
 for i_line, line in enumerate(g):

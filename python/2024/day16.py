@@ -65,7 +65,7 @@ def find_lowest_scores(g: Grid, s: v2, t: v2, rotate_cost: int = 1000):
 
 
 ROT_COST = 1000
-rows = read_input_lines(16, postfix="")
+rows = read_input_lines(16, 2024, postfix="")
 g = Grid([list(r) for r in rows])
 start, target = find_cell(g, 'S'), find_cell(g, 'E')
 dist_part1 = find_lowest_scores(g, start, target)

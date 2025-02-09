@@ -46,7 +46,7 @@ N, M = 71, 71
 N_FALL = 1024
 start, target = v2(0, 0), v2(70, 70)
 
-coords = parse_input(read_input_lines(18, postfix=""))
+coords = parse_input(read_input_lines(18, 2024, postfix=""))
 g = simulate_fall(N, M, coords[:N_FALL])
 
 dist = shortest_paths(g, start)
