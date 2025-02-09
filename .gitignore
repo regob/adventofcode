@@ -45,3 +45,8 @@ TAGS
 *.-undo-tree
 .ruff_cache/
 *.html
+
+# artifacts
+*.png
+*.zip
+a.out
