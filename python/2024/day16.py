@@ -79,6 +79,7 @@ print('part 1:', ans)
 # be reconstructed by running a DFS backwards on the graph (still paying attention
 # to the 4 nodes/tile).
 
+
 def shortest_path_tiles(g: Grid, s: v2, t: v2, dist: Grid):
     "Find all tiles in the grid, that are part of a shortest route from s to t."
 

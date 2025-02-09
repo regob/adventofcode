@@ -4,6 +4,7 @@ from aoc_utils.load_input import read_input_lines
 # Iterate all edges (pairs of connected vertices), and calculate the intersection
 # of the neighbors of the two nodes: O(E * V)
 
+
 class UGraph:
     "Undirected graph."
 
@@ -61,6 +62,7 @@ print('part 1:', triangles)
 #    the set of candidate nodes that all current nodes have an edge to.
 # 2. Do the same with optimized data structures (bitset instead of hashset)
 # 3. maybe add coloring as described in https://en.wikipedia.org/wiki/MaxCliqueDyn_algorithm
+
 
 def largest_clique_including(
     g: UGraph,

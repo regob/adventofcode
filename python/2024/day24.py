@@ -228,6 +228,7 @@ print('part 2:', ','.join(sorted_res))
 
 # other attempts #######################################################################
 
+
 def swap_gates(n: Network, var1: str, var2: str):
     gate1 = n.gates[var1]
     gate2 = n.gates[var2]
