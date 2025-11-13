@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euo pipefail
+
 if [ -z "$2" ]; then
     YEAR=$(date +"%Y")
 else
@@ -18,7 +20,7 @@ DAY_NOLEADINGZERO=$(echo "$DAY" | sed 's/^0*//')
 URL=https://adventofcode.com/${YEAR}/day/${DAY_NOLEADINGZERO}/input
 FILE="input/${YEAR}_${DAY}.txt"
 
-wget -O $FILE --load-cookies=./cookies.txt "$URL"
+wget -O $FILE --load-cookies=./cookies.txt "$URL" | grep 200 || (echo "Failed to download file" && exit 1)
 N_LINES=$(wc -l $FILE | cut -d ' ' -f1)
 echo "Num lines: $N_LINES"
 echo "Sample:"
