@@ -16,12 +16,14 @@ int main(int argc, char* argv[]) {
     int dt = year * 100 + day;
     switch (dt) {
     case 202101:
-        solve_202101();
+      solve_202101();
+      break;
     case 202102:
-        solve_202102();
+      solve_202102();
+      break;
     default:
-        std::cout << "Invalid day provided (or not implemented yet): " << day
-                  << "\n";
-        exit(1);
+      std::cout << "Invalid day provided (or not implemented yet): " << day
+                << "\n";
+      exit(1);
     }
 }

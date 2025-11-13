@@ -1,5 +1,5 @@
 #include <iostream>
 
-void day02() {
+void solve_202102() {
   std::cout << "Day 2" << "\n";
 }
