@@ -4,7 +4,7 @@
 
 #### PROJECT SETTINGS ####
 CXX ?= g++
-COMPILE_FLAGS := -O2 -Wall -std=c++17 -Wextra
+COMPILE_FLAGS := -O2 -Wall -std=c++17 -Wextra -Wno-sign-compare -I.
 DCOMPILE_FLAGS := -D DEBUG -g
 LINK_FLAGS :=
 LIBS :=
@@ -51,6 +51,8 @@ dirs:
 # Source file rules
 # After the first compilation they will be joined with the rules from the
 # dependency files to provide header dependencies
+# MMD=generate .d header dep files
+# MP: add phony targets for headers
 $(BUILD_PATH)/%.o: $(SRC_PATH)/%.$(SRC_EXT)
 	@echo "Compiling: $< -> $@"
 	$(CMD_PREFIX)$(CXX) $(CXXFLAGS) $(INCLUDES) -MP -MMD -c $< -o $@
@@ -59,3 +61,15 @@ $(BUILD_PATH)/%.o: $(SRC_PATH)/%.$(SRC_EXT)
 $(BIN_PATH)/$(BIN_NAME): $(OBJECTS)
 	@echo "Linking: $@"
 	$(CXX) $(OBJECTS) $(LDFLAGS) -o $@
+
+# Removes all build files
+.PHONY: clean
+clean:
+	@echo "Deleting $(BIN_NAME) symlink"
+	@$(RM) $(BIN_NAME)
+	@echo "Deleting directories"
+	@$(RM) -r build
+	@$(RM) -r bin
+
+.PHONY: force
+force: clean all

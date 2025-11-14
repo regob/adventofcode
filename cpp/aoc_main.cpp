@@ -2,8 +2,7 @@
 #include <iostream>
 #include <stdlib.h>
 
-void solve_202101();
-void solve_202102();
+#include "2021/aoc_2021.h"
 
 int main(int argc, char* argv[]) {
     if (argc != 3) {

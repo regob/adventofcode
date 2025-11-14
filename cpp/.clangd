@@ -1,0 +1,13 @@
+CompileFlags:
+  Add:
+    - -x
+    - c++
+    - -I.
+InlayHints:
+  BlockEnd: false
+  Designators: true
+  Enabled: true
+  ParameterNames: false
+  DeducedTypes: true
+  DefaultArguments: false
+  TypeNameLimit: 24
