@@ -13,6 +13,6 @@ v2 v2::operator*(const v2& right) { return v2(x * right.x, y * right.y); }
 v2 v2::operator/(const v2& right) { return v2(x / right.x, y / right.y); }
 int64_t v2::dot(const v2 &right) {return (x * right.x + y * right.y);}
 
-std::string to_string(const v2& v) {
+std::string to_str(const v2& v) {
     return "(" + to_string(v.x) + ", " + to_string(v.y) + ")";
 }

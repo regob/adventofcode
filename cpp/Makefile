@@ -4,7 +4,7 @@
 
 #### PROJECT SETTINGS ####
 CXX ?= g++
-COMPILE_FLAGS := -O2 -Wall -std=c++17 -Wextra -Wno-sign-compare -I.
+COMPILE_FLAGS := -O2 -Wall -std=c++20 -Wextra -Wno-sign-compare -I.
 DCOMPILE_FLAGS := -D DEBUG -g
 LINK_FLAGS :=
 LIBS :=

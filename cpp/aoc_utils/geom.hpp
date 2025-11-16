@@ -14,4 +14,4 @@ struct v2 {
     int64_t dot(const v2 &right);
 };
 
-std::string to_string(const v2 &v);
+std::string to_str(const v2 &v);

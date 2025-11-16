@@ -7,16 +7,16 @@ std::vector<int> read_input_ints(int year, int day);
 
 // Output /////////////////////////////////////////////////////////////////////
 
-std::string to_string(const int &x);
-std::string to_string(const long &x);
-std::string to_string(const long long &x);
+std::string to_str(const int &x);
+std::string to_str(const long &x);
+std::string to_str(const long long &x);
 
-template <typename T> std::string to_string(const std::basic_string<T> &s) {
+template <typename T> std::string to_str(const std::basic_string<T> &s) {
     return s;
 }
 
 template <typename T> void report_output(const T& val) {
-    std::cout << "Output: " << to_string(val) << "\n";
+    std::cout << "Output: " << to_str(val) << "\n";
 }
 
 // Debug print ////////////////////////////////////////////////////////////////

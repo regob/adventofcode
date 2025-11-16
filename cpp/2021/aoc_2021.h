@@ -1,2 +1,10 @@
 void solve_202101();
 void solve_202102();
+void solve_202103();
+void solve_202104();
+void solve_202105();
+void solve_202106();
+void solve_202107();
+void solve_202108();
+void solve_202109();
+void solve_202110();

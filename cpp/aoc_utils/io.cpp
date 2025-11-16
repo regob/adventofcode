@@ -62,9 +62,9 @@ vector<int> read_input_ints(int year, int day) {
 
 // Output /////////////////////////////////////////////////////////////////////
 
-std::string to_string(const int &x) {return std::to_string(x);}
-std::string to_string(const long &x) {return std::to_string(x);}
-std::string to_string(const long long &x) {return std::to_string(x);}
+std::string to_str(const int &x) {return std::to_string(x);}
+std::string to_str(const long &x) {return std::to_string(x);}
+std::string to_str(const long long &x) {return std::to_string(x);}
 
 
 // void report_output(int x) {
