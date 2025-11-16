@@ -29,8 +29,10 @@ ifstream open_input_file(int year, int day) {
     fname_ss << setw(2) << setfill('0') << day << ".txt";
 
     fs::path input_file = input_dir / fname_ss.str();
+    if (!fs::exists(input_file)) {
+        throw runtime_error("File cannot be found: " + input_file.string());
+    }
     fp.open(input_file);
-    // TODO: check failbit
     cout << "Opened input file: " << input_file << "\n";
     return fp;
 }
@@ -40,7 +42,7 @@ vector<string> read_input_lines(int year, int day) {
 
     vector<string> lines;
     string line;
-    while (ifs >> line) {
+    while (std::getline(ifs, line)) {
       lines.push_back(line);
     }
     return lines;
@@ -57,6 +59,14 @@ vector<int> read_input_ints(int year, int day) {
     return v;
 }
 
-void report_output(int x) {
-    cout << "Output result: " << x << endl;
-}
+
+// Output /////////////////////////////////////////////////////////////////////
+
+std::string to_string(const int &x) {return std::to_string(x);}
+std::string to_string(const long &x) {return std::to_string(x);}
+std::string to_string(const long long &x) {return std::to_string(x);}
+
+
+// void report_output(int x) {
+//     std::cout << "Output: " << std::to_string(x) << "\n";
+// }
