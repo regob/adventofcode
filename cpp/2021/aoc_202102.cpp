@@ -1,6 +1,5 @@
 #include <cstdlib>
 #include <iostream>
-#include <numeric>
 #include <vector>
 
 #include <boost/algorithm/string.hpp>
@@ -9,6 +8,7 @@
 #include "aoc_utils/geom.hpp"
 
 using namespace std;
+using namespace aoc_utils;
 
 namespace aoc202102 {
     struct Command {

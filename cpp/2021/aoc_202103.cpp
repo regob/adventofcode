@@ -1,17 +1,14 @@
-#include <algorithm>
 #include <charconv>
-#include <cstdlib>
 #include <iostream>
-#include <numeric>
 #include <system_error>
 #include <vector>
 
 #include <boost/algorithm/string.hpp>
 
 #include "aoc_utils/io.hpp"
-#include "aoc_utils/geom.hpp"
 
 using namespace std;
+using namespace aoc_utils;
 
 namespace aoc202103 {
     vector<int> parse_ints_base2(const vector<string>& v) {

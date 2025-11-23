@@ -24,7 +24,7 @@ int main(int argc, char* argv[]) {
         solve_202103();
         break;
     case 202104:
-        // solve_202104();
+        solve_202104();
         break;
     case 202105:
         // solve_202105();

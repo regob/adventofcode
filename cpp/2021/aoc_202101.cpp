@@ -5,6 +5,7 @@
 #include "aoc_utils/io.hpp"
 
 using namespace std;
+using namespace aoc_utils;
 
 namespace aoc202101 {
     int num_increases(const vector<int> &v) {
