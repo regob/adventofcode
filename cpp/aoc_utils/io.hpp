@@ -1,12 +1,14 @@
 #pragma once
+#include <filesystem>
 #include <iostream>
 #include <string>
 #include <vector>
 
 namespace aoc_utils {
 
-    std::vector<std::string> read_input_lines(int year, int day);
-    std::vector<int> read_input_ints(int year, int day);
+    std::filesystem::path find_input_file(int year, int day, bool test = false);
+    std::vector<std::string> read_input_lines(std::filesystem::path input_file);
+    std::vector<int> read_input_ints(std::filesystem::path input_file);
 
 // Output /////////////////////////////////////////////////////////////////////
 

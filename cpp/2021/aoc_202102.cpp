@@ -68,7 +68,7 @@ namespace aoc202102 {
 using namespace aoc202102;
 
 void solve_202102() {
-    auto lines = read_input_lines(2021, 2);
+    auto lines = read_input_lines(find_input_file(2021, 2));
     auto cmds = parse_commands(lines);
     cout << "Cmd size " << cmds.size() << "\n";
     v2 pos = apply_commands({0, 0}, cmds);

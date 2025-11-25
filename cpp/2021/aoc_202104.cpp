@@ -1,9 +1,4 @@
-#include <algorithm>
-#include <charconv>
-#include <cstdlib>
 #include <iostream>
-#include <numeric>
-#include <system_error>
 #include <vector>
 #include <sstream>
 #include <optional>
@@ -78,7 +73,7 @@ namespace aoc202104  {
 using namespace aoc202104;
 
 void solve_202104() {
-    auto lines = read_input_lines(2021, 4);
+    auto lines = read_input_lines(find_input_file(2021, 4));
     auto bingo_nums = parse_nums(lines[0], ',');
     assert(lines[1] == "");
     vector<matrix<int>> bingos;

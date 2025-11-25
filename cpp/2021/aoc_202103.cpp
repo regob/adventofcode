@@ -79,7 +79,7 @@ namespace aoc202103 {
 using namespace aoc202103;
 
 void solve_202103() {
-    auto lines = read_input_lines(2021, 3);
+    auto lines = read_input_lines(find_input_file(2021, 3));
     int bit_width = lines[0].size();
     auto ints = parse_ints_base2(lines);
     int res = power_consumption(ints, bit_width);

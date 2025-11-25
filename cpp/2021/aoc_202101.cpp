@@ -37,7 +37,7 @@ namespace aoc202101 {
 using namespace aoc202101;
 
 void solve_202101() {
-    auto ints = read_input_ints(2021, 1);
+    auto ints = read_input_ints(find_input_file(2021, 1));
     int res = num_increases(ints);
     report_output(res);
 

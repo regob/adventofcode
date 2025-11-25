@@ -22,14 +22,21 @@ namespace aoc_utils {
         throw runtime_error("Input directory cannot be found!");
     }
 
-    ifstream open_input_file(int year, int day) {
-        ifstream fp;
+    fs::path find_input_file(int year, int day, bool test) {
         fs::path input_dir = find_input_dir();
         stringstream fname_ss;
         fname_ss << year << "_";
-        fname_ss << setw(2) << setfill('0') << day << ".txt";
+        fname_ss << setw(2) << setfill('0') << day;
+        if (test) {
+            fname_ss << "_test";
+        }
+        fname_ss << ".txt";
 
-        fs::path input_file = input_dir / fname_ss.str();
+        return input_dir / fname_ss.str();
+    }
+
+    ifstream open_input_file(fs::path input_file) {
+        ifstream fp;
         if (!fs::exists(input_file)) {
             throw runtime_error("File cannot be found: " + input_file.string());
         }
@@ -38,8 +45,8 @@ namespace aoc_utils {
         return fp;
     }
 
-    vector<string> read_input_lines(int year, int day) {
-        ifstream ifs = open_input_file(year, day);
+    vector<string> read_input_lines(fs::path input_file) {
+        ifstream ifs = open_input_file(input_file);
 
         vector<string> lines;
         string line;
@@ -49,8 +56,8 @@ namespace aoc_utils {
         return lines;
     }
 
-    vector<int> read_input_ints(int year, int day) {
-        ifstream ifs = open_input_file(year, day);
+    vector<int> read_input_ints(fs::path input_file) {
+        ifstream ifs = open_input_file(input_file);
 
         vector<int> v;
         int x;
