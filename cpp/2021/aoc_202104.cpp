@@ -1,6 +1,5 @@
 #include <iostream>
 #include <vector>
-#include <sstream>
 #include <optional>
 
 #include <boost/algorithm/string.hpp>
@@ -13,24 +12,12 @@ using namespace std;
 using namespace aoc_utils;
 
 namespace aoc202104  {
-    vector<int> parse_nums(const string& line, char sep) {
-        string token;
-        istringstream is(line);
-        vector<int> nums;
-
-        while (getline(is, token, sep)) {
-            if (token.size())
-                nums.push_back(stoi(token));
-        }
-        return nums;
-    }
-
     matrix<int> parse_matrix(const vector<string> &lines, char sep) {
         vector<vector<int>> m;
         m.resize(lines.size());
         uint i = 0;
         for (string line : lines) {
-            m[i++] = parse_nums(line, sep);
+            m[i++] = parse_ints(line, sep);
         }
         return matrix(m);
     }
@@ -74,7 +61,7 @@ using namespace aoc202104;
 
 void solve_202104() {
     auto lines = read_input_lines(find_input_file(2021, 4));
-    auto bingo_nums = parse_nums(lines[0], ',');
+    auto bingo_nums = parse_ints(lines[0], ',');
     assert(lines[1] == "");
     vector<matrix<int>> bingos;
 

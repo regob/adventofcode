@@ -1,9 +1,12 @@
+#pragma once
 #include <array>
 #include <cstdint>
 #include <numeric>
 #include <stdexcept>
 #include <string>
 #include <vector>
+
+#include "aoc_utils/common.hpp"
 
 namespace aoc_utils {
 

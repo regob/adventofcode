@@ -2,6 +2,8 @@
 #include <cstdint>
 #include <string>
 
+#include "aoc_utils/common.hpp"
+
 namespace aoc_utils {
     struct v2 {
         int64_t x;

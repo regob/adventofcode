@@ -4,11 +4,14 @@
 #include <string>
 #include <vector>
 
+#include "aoc_utils/common.hpp"
+
 namespace aoc_utils {
 
     std::filesystem::path find_input_file(int year, int day, bool test = false);
     std::vector<std::string> read_input_lines(std::filesystem::path input_file);
     std::vector<int> read_input_ints(std::filesystem::path input_file);
+    std::vector<int> parse_ints(const std::string& line, char sep);
 
 // Output /////////////////////////////////////////////////////////////////////
 

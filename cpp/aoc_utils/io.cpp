@@ -6,12 +6,15 @@
 #include <fstream>
 #include <sstream>
 
+#include <boost/algorithm/string/regex.hpp>
 #include "aoc_utils/io.hpp"
 
 using namespace std;
 namespace fs = std::filesystem;
+using namespace boost;
 
 namespace aoc_utils {
+    // Input utils ////////////////////////////////////////////////////////////
     fs::path find_input_dir() {
         fs::path cwd = fs::current_path();
         while (cwd.parent_path() != cwd) {
@@ -60,11 +63,28 @@ namespace aoc_utils {
         ifstream ifs = open_input_file(input_file);
 
         vector<int> v;
-        int x;
-        while (ifs >> x) {
-            v.push_back(x);
+        string line;
+        const regex int_re("[0-9]+");
+
+        while (getline(ifs, line)) {
+            sregex_iterator res(line.begin(), line.end(), int_re);
+            sregex_iterator end;
+            for (; res != end; res++)
+                v.push_back(stoi((*res)[0]));
         }
         return v;
+    }
+
+    vector<int> parse_ints(const string& line, char sep) {
+        string token;
+        istringstream is(line);
+        vector<int> nums;
+
+        while (getline(is, token, sep)) {
+            if (token.size())
+                nums.push_back(stoi(token));
+        }
+        return nums;
     }
 
 
