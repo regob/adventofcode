@@ -1,10 +1,14 @@
 #pragma once
 #include <algorithm>
 #include <cmath>
+#include <set>
+#include <string>
+#include <unordered_set>
 #include <vector>
 
 #include "aoc_utils/common.hpp"
 
+// Basic vector reductions/operations /////////////////////////////////////////
 template <typename T> long long sum(const std::vector<T>& v) {
     long long res = 0;
     for (const T& t : v)
@@ -70,9 +74,32 @@ template <typename T> T lower_median(const std::vector<T>& v) {
     return cpy[n - 1];
 }
 
+// Casting ////////////////////////////////////////////////////////////////////
+
 template <typename T> std::vector<long long> upcast(const std::vector<T>& v) {
     std::vector<long long> vll(v.size(), 0);
     for (uint i = 0; i < v.size(); i++)
         vll[i] = v[i];
     return vll;
+}
+
+template <typename T> std::set<T> to_set(const std::vector<T>& v) {
+    std::set<T> s(v.begin(), v.end());
+    return s;
+}
+
+std::set<char> to_set(const std::string& v);
+
+template <typename T> std::unordered_set<T> to_uset(const std::vector<T>& v) {
+    std::unordered_set<T> s(v.begin(), v.end());
+    return s;
+}
+
+// Set operations /////////////////////////////////////////////////////////////
+
+template <typename T>
+std::set<T> operator-(const std::set<T>& s1, const std::set<T>& s2) {
+    std::set<T> s = s1;
+    for (const T &t : s2) s.erase(t);
+    return s;
 }
