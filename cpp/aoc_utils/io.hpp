@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <set>
 
 #include "aoc_utils/common.hpp"
 
@@ -20,6 +21,31 @@ namespace aoc_utils {
     std::string to_str(const long long &x);
 
     template <typename T> std::string to_str(const std::basic_string<T> &s) {
+        return s;
+    }
+
+    template <typename T> std::string to_str(const std::set<T> &v) {
+        std::string s = "{";
+        auto it = v.begin();
+        if (it != v.end()) {
+            s += to_str(*it++);
+        }
+        for (; it != v.end(); it++) {
+            s += " ";
+            s += to_str(*it);
+        }
+        s += "}";
+        return s;
+    }
+
+
+    template <typename T> std::string to_str(const std::vector<T> &v) {
+        std::string s = "[";
+        for (uint i = 0; i < v.size(); i++) {
+            s += to_str(v[i]);
+            if (i < v.size() - 1) s += " ";
+        }
+        s += "]";
         return s;
     }
 

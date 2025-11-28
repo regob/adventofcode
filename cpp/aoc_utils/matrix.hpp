@@ -7,6 +7,7 @@
 #include <vector>
 
 #include "aoc_utils/common.hpp"
+#include "aoc_utils/geom.hpp"
 
 namespace aoc_utils {
 
@@ -101,6 +102,32 @@ namespace aoc_utils {
                 for (uint j = 0; j < ncol; j++) res[i][j] = dat[i][j] >= x;
             }
             return res;
+        }
+
+        std::vector<T> neighbors(size_t r, size_t c) const {
+            std::vector<T> neigh;
+            if (r > 0)
+                neigh.push_back(dat[r - 1][c]);
+            if (r < nrow - 1)
+                neigh.push_back(dat[r + 1][c]);
+            if (c > 0)
+                neigh.push_back(dat[r][c - 1]);
+            if (c < ncol - 1)
+                neigh.push_back(dat[r][c + 1]);
+            return neigh;
+        }
+
+        std::vector<v2> neighbor_coords(size_t r, size_t c) const {
+            std::vector<v2> neigh;
+            if (r > 0)
+                neigh.emplace_back(r - 1, c);
+            if (r < nrow - 1)
+                neigh.emplace_back(r + 1, c);
+            if (c > 0)
+                neigh.emplace_back(r, c - 1);
+            if (c < ncol - 1)
+                neigh.emplace_back(r, c + 1);
+            return neigh;
         }
 
       private:

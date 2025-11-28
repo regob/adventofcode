@@ -8,13 +8,19 @@ using namespace std;
 namespace aoc_utils {
     v2::v2(int64_t x, int64_t y) : x(x), y(y) {}
     v2::v2(int32_t x, int32_t y) : x(x), y(y) {}
-    v2 v2::operator+(const v2& right) { return v2(x + right.x, y + right.y); }
-    v2 v2::operator-(const v2& right) { return v2(x - right.x, y - right.y); }
-    v2 v2::operator*(const v2& right) { return v2(x * right.x, y * right.y); }
-    v2 v2::operator/(const v2& right) { return v2(x / right.x, y / right.y); }
+    v2::v2(uint32_t x, uint32_t y) : x(x), y(y) {}
+    v2::v2(uint64_t x, uint64_t y) : x(x), y(y) {}
+    v2 v2::operator+(const v2& right) const { return v2(x + right.x, y + right.y); }
+    v2 v2::operator-(const v2& right) const { return v2(x - right.x, y - right.y); }
+    v2 v2::operator*(const v2& right) const { return v2(x * right.x, y * right.y); }
+    v2 v2::operator/(const v2& right) const { return v2(x / right.x, y / right.y); }
+    bool v2::operator<(const v2& right) const {
+        return (x < right.x || (x == right.x && y < right.y));
+    }
     int64_t v2::dot(const v2 &right) {return (x * right.x + y * right.y);}
 
     std::string to_str(const v2& v) {
         return "(" + to_string(v.x) + ", " + to_string(v.y) + ")";
     }
+
 }
